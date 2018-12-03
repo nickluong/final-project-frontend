@@ -7,8 +7,6 @@ import classNames from "classnames";
 import { List, ListItem, withStyles } from "@material-ui/core";
 
 // @material-ui/icons
-import Favorite from "@material-ui/icons/Favorite";
-
 import footerStyle from "assets/jss/material-kit-react/components/footerStyle.jsx";
 
 function Footer({ ...props }) {
@@ -28,53 +26,36 @@ function Footer({ ...props }) {
           <List className={classes.list}>
             <ListItem className={classes.inlineBlock}>
               <a
-                href="https://www.creative-tim.com/"
+                href="https://www.linkedin.com/in/nicholasdeeluong/"
                 className={classes.block}
                 target="_blank"
               >
-                Creative Tim
+                LinkedIn
               </a>
             </ListItem>
             <ListItem className={classes.inlineBlock}>
               <a
-                href="https://www.creative-tim.com/presentation"
+                href="https://github.com/nickluong"
                 className={classes.block}
                 target="_blank"
               >
-                About us
+                GitHub
               </a>
             </ListItem>
             <ListItem className={classes.inlineBlock}>
               <a
-                href="http://blog.creative-tim.com/"
+                href="https://medium.com/@nickluong"
                 className={classes.block}
                 target="_blank"
               >
                 Blog
               </a>
             </ListItem>
-            <ListItem className={classes.inlineBlock}>
-              <a
-                href="https://www.creative-tim.com/license"
-                className={classes.block}
-                target="_blank"
-              >
-                Licenses
-              </a>
-            </ListItem>
           </List>
         </div>
         <div className={classes.right}>
-          &copy; {1900 + new Date().getYear()} , made with{" "}
-          <Favorite className={classes.icon} /> by{" "}
-          <a
-            href="https://www.creative-tim.com"
-            className={aClasses}
-            target="_blank"
-          >
-            Creative Tim
-          </a>{" "}
-          for a better web.
+          &copy; {1900 + new Date().getYear()} , made by Nick Luong at the
+          Flatiron School.
         </div>
       </div>
     </footer>

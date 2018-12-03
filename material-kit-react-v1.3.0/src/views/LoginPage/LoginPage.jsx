@@ -4,7 +4,6 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Icon from "@material-ui/core/Icon";
 // @material-ui/icons
-import Email from "@material-ui/icons/Email";
 import People from "@material-ui/icons/People";
 // core components
 import Header from "components/Header/Header.jsx";
@@ -21,14 +20,15 @@ import CustomInput from "components/CustomInput/CustomInput.jsx";
 
 import loginPageStyle from "assets/jss/material-kit-react/views/loginPage.jsx";
 
-import image from "assets/img/bg7.jpg";
+import image from "assets/img/stars.gif";
 
 class LoginPage extends React.Component {
   constructor(props) {
     super(props);
     // we use this to make the card to appear after the page has been rendered
     this.state = {
-      cardAnimaton: "cardHidden"
+      cardAnimaton: "cardHidden",
+      signIn: false
     };
   }
   componentDidMount() {
@@ -39,7 +39,35 @@ class LoginPage extends React.Component {
       }.bind(this),
       700
     );
+    document
+      .querySelector(".MuiButton-label-69")
+      .addEventListener("click", () => {
+        window.location = "/";
+      });
   }
+
+  handleClick = () => {
+    setTimeout(
+      function() {
+        this.setState({ cardAnimaton: "", signIn: !this.state.signIn });
+      }.bind(this),
+      700
+    );
+    this.setState({
+      cardAnimaton: "cardHidden"
+    });
+  };
+
+  handleSubmit = () => {
+    let username = document.getElementById("first");
+    let password = document.getElementById("pass");
+    if (username && password) {
+      debugger;
+      console.log("username: " + username.value);
+      console.log("password: " + password.value);
+    }
+  };
+
   render() {
     const { classes, ...rest } = this.props;
     return (
@@ -47,7 +75,7 @@ class LoginPage extends React.Component {
         <Header
           absolute
           color="transparent"
-          brand="Material Kit React"
+          brand="Dolphin Connect"
           rightLinks={<HeaderLinks />}
           {...rest}
         />
@@ -65,41 +93,15 @@ class LoginPage extends React.Component {
                 <Card className={classes[this.state.cardAnimaton]}>
                   <form className={classes.form}>
                     <CardHeader color="primary" className={classes.cardHeader}>
-                      <h4>Login</h4>
-                      <div className={classes.socialLine}>
-                        <Button
-                          justIcon
-                          href="#pablo"
-                          target="_blank"
-                          color="transparent"
-                          onClick={e => e.preventDefault()}
-                        >
-                          <i className={"fab fa-twitter"} />
-                        </Button>
-                        <Button
-                          justIcon
-                          href="#pablo"
-                          target="_blank"
-                          color="transparent"
-                          onClick={e => e.preventDefault()}
-                        >
-                          <i className={"fab fa-facebook"} />
-                        </Button>
-                        <Button
-                          justIcon
-                          href="#pablo"
-                          target="_blank"
-                          color="transparent"
-                          onClick={e => e.preventDefault()}
-                        >
-                          <i className={"fab fa-google-plus-g"} />
-                        </Button>
-                      </div>
+                      {this.state.signIn === false ? (
+                        <h3>Sign Up</h3>
+                      ) : (
+                        <h3> Sign In </h3>
+                      )}
                     </CardHeader>
-                    <p className={classes.divider}>Or Be Classical</p>
                     <CardBody>
                       <CustomInput
-                        labelText="First Name..."
+                        labelText="Username"
                         id="first"
                         formControlProps={{
                           fullWidth: true
@@ -109,21 +111,6 @@ class LoginPage extends React.Component {
                           endAdornment: (
                             <InputAdornment position="end">
                               <People className={classes.inputIconsColor} />
-                            </InputAdornment>
-                          )
-                        }}
-                      />
-                      <CustomInput
-                        labelText="Email..."
-                        id="email"
-                        formControlProps={{
-                          fullWidth: true
-                        }}
-                        inputProps={{
-                          type: "email",
-                          endAdornment: (
-                            <InputAdornment position="end">
-                              <Email className={classes.inputIconsColor} />
                             </InputAdornment>
                           )
                         }}
@@ -147,10 +134,40 @@ class LoginPage extends React.Component {
                       />
                     </CardBody>
                     <CardFooter className={classes.cardFooter}>
-                      <Button simple color="primary" size="lg">
-                        Get started
+                      <Button
+                        simple
+                        color="primary"
+                        size="lg"
+                        onClick={this.handleSubmit}
+                      >
+                        Get Started
                       </Button>
                     </CardFooter>
+                    {this.state.signIn === false ? (
+                      <h6>
+                        Already have an Account?
+                        <Button
+                          simple
+                          color="primary"
+                          size="sm"
+                          onClick={this.handleClick}
+                        >
+                          Sign In
+                        </Button>
+                      </h6>
+                    ) : (
+                      <h6>
+                        Need an Account?
+                        <Button
+                          simple
+                          color="primary"
+                          size="sm"
+                          onClick={this.handleClick}
+                        >
+                          Sign Up
+                        </Button>
+                      </h6>
+                    )}
                   </form>
                 </Card>
               </GridItem>

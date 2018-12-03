@@ -19,8 +19,6 @@ import landingPageStyle from "assets/jss/material-kit-react/views/landingPage.js
 
 // Sections for this page
 import ProductSection from "./Sections/ProductSection.jsx";
-import TeamSection from "./Sections/TeamSection.jsx";
-import WorkSection from "./Sections/WorkSection.jsx";
 
 const dashboardRoutes = [];
 
@@ -46,7 +44,7 @@ class LandingPage extends React.Component {
             <GridContainer>
               <GridItem xs={12} sm={12} md={6}>
                 <h1 className={classes.title}>
-                  Netflix and Chill with whoever you want.
+                  Netflix and Chill with whomever you want.
                 </h1>
                 <h4>
                   Connect with friends or anyone special to catch a show
@@ -60,7 +58,6 @@ class LandingPage extends React.Component {
         <div className={classNames(classes.main, classes.mainRaised)}>
           <div className={classes.container}>
             <ProductSection />
-            <WorkSection />
           </div>
         </div>
         <Footer />
