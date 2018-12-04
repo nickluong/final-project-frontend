@@ -59,12 +59,59 @@ class LoginPage extends React.Component {
   };
 
   handleSubmit = () => {
-    let username = document.getElementById("first");
-    let password = document.getElementById("pass");
+    let username = document.getElementById("first").value;
+    let password = document.getElementById("pass").value;
     if (username && password) {
-      debugger;
-      console.log("username: " + username.value);
-      console.log("password: " + password.value);
+      if (this.state.signIn) {
+        fetch("http://localhost:3004/api/v1/users/login", {
+          method: "POST",
+          headers: { "Content-type": "application/json" },
+          body: JSON.stringify({
+            user: {
+              username: username,
+              password: password
+            }
+          })
+        })
+          .then(response => {
+            if (response.ok) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          })
+          .then(r => {
+            console.log(r);
+            console.log(this.props);
+            localStorage.setItem("token", r.token);
+            localStorage.setItem("user", r.user);
+            this.props.history.push("/");
+          });
+      } else {
+        fetch("http://localhost:3004/api/v1/users/signup", {
+          method: "POST",
+          headers: { "Content-type": "application/json" },
+          body: JSON.stringify({
+            user: {
+              username: username,
+              password: password
+            }
+          })
+        })
+          .then(response => {
+            if (response.ok) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          })
+          .then(response => {
+            console.log("fetch response:", response);
+            localStorage.setItem("token", response.token);
+            // this.props.history.push(`/${response.user.username}`)
+            // this.props.history.push("/self")
+          });
+      }
     }
   };
 
