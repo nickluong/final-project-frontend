@@ -1,3 +1,4 @@
+/* global chrome */
 import React from "react";
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -84,7 +85,8 @@ class LoginPage extends React.Component {
             console.log(r);
             console.log(this.props);
             localStorage.setItem("token", r.token);
-            localStorage.setItem("user", r.user);
+            localStorage.setItem("userId", r.user.id);
+            localStorage.setItem("username", r.user.username);
             this.props.history.push("/");
           });
       } else {
@@ -108,8 +110,9 @@ class LoginPage extends React.Component {
           .then(response => {
             console.log("fetch response:", response);
             localStorage.setItem("token", response.token);
-            // this.props.history.push(`/${response.user.username}`)
-            // this.props.history.push("/self")
+            localStorage.setItem("userId", response.user.id);
+            localStorage.setItem("username", response.user.username);
+            this.props.history.push("/");
           });
       }
     }

@@ -25,6 +25,7 @@ class HeaderLinks extends Component {
   handleLogOut = () => {
     localStorage.clear();
     this.setState({ loggedIn: !this.state.loggedIn });
+    window.location = "/";
   };
 
   render() {
@@ -46,24 +47,23 @@ class HeaderLinks extends Component {
           <ListItem className={classes.listItem}>
             <CustomDropdown
               noLiPadding
-              buttonText="Me"
+              buttonText={localStorage.username}
               buttonProps={{
                 className: classes.navLink,
                 color: "transparent"
               }}
               buttonIcon={Person}
               dropdownList={[
-                <Link to="/" className={classes.dropdownLink}>
-                  User
-                </Link>,
-                <Button
+                <a onClick={this.handleStart} className={classes.dropdownLink}>
+                  Start Session
+                </a>,
+                <a
                   onClick={this.handleLogOut}
-                  href="/"
-                  target="_self"
+                  target="_blank"
                   className={classes.dropdownLink}
                 >
                   Log Out
-                </Button>
+                </a>
               ]}
             />
           </ListItem>
